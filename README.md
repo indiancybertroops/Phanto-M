@@ -43,7 +43,7 @@ root permission is required to install essential packages
 
 >Without Brutforce(To save your valuable Time)
 # Main Phanto-M Image
-![](trinetra.png)
+![](phanto-m.png)
 # Installation :
 > clone via git clone
 
