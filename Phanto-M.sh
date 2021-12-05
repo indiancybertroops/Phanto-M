@@ -39,7 +39,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 echo -e " ${C} " 
 PS3='Please enter your choice: '
-options=("Api 1" "Api 2 (Recommended)" "Api 3" "Combined Result From All Api Togetherly" "Exit"
+options=("Api 1" "Api 2 (Recommended)" "Api 3" "Combined Result From All Api Togetherly" "Api 4" "Exit"
 )
 select opt in "${options[@]}"
 do
@@ -71,6 +71,11 @@ lynx --dump https://dns.bufferover.run/dns?q=$site | jq -r '.FDNS_A[]' |  sort -
 cat result.txt result2.txt result3.txt > final.txt
 echo " ${R} Results saved into ${B}final.txt ${R}checkout file created on same Directory where You've Installed Tool"
 ;;
+"Api 4")
+echo -e " ${Y} Enter The Website For Api 4"
+read site
+lynx --dump https://api.hackertarget.com/hostsearch/?q=$site |  sort -u > result4.txt
+echo -e " ${R} Results saved into ${B}result4.txt ${R}checkout file created on same Directory where You've Installed Tool"
 "Exit")
 break
 ;;
