@@ -68,7 +68,8 @@ read site
 lynx --dump https://jldc.me/anubis/subdomains/$site | jq -r '.[]' |  sort -u > result3.txt
 lynx --dump https://sonar.omnisint.io/subdomains/$site | jq -r '.[]' |  sort -u > result2.txt
 lynx --dump https://dns.bufferover.run/dns?q=$site | jq -r '.FDNS_A[]' |  sort -u > result.txt
-cat result.txt result2.txt result3.txt > final.txt
+lynx --dump https://api.hackertarget.com/hostsearch/?q=$site |  sort -u > result4.txt
+cat result.txt result2.txt result3.txt result4.txt > final.txt
 echo " ${R} Results saved into ${B}final.txt ${R}checkout file created on same Directory where You've Installed Tool"
 ;;
 "Api 4")
