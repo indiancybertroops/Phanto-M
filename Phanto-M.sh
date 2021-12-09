@@ -39,7 +39,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 echo -e " ${C} " 
 PS3='Please enter your choice: '
-options=("Api 1" "Api 2 (Recommended)" "Api 3" "Combined Result From All Api Togetherly" "Api 4" "Wayback Url Scrap" "Exit"
+options=("Api 1" "Api 2 (Recommended)" "Api 3" "Combined Result From All Api Togetherly" "Api 4" "Wayback Url Scrap" "Api 5" "Exit"
 )
 select opt in "${options[@]}"
 do
@@ -81,8 +81,14 @@ echo -e " ${R} Results saved into ${B}result4.txt ${R}checkout file created on s
 "Wayback Url Scrap")
 echo -e " ${Y}Enter Url For Result From Wayback Machine"
 read site
-lynx --dump http://web.archive.org/cdx/search/cdx?url=$1 | grep -oE http.*://.*/ | sort -u > $1.txt
+lynx --dump http://web.archive.org/cdx/search/cdx?url=$site | grep -oE http.*://.*/ | sort -u > $1.txt
 echo -e " ${R} Results saved into ${B}$1.txt ${R}checkout file created on same Directory where You've Installed Tool"
+;;
+"Api 5")
+echo -e " ${Y}Enter Url For Result From Api 5"
+read site
+lynx --dump  https://www.threatcrowd.org/searchApi/v2/domain/report/?domain=$site | jq -r ".subdomains[]" | sort -u > result5.txt
+echo -e " ${R} Results saved into ${B}result5.txt ${R}checkout file created on same Directory where You've Installed Tool"
 ;;
 "Exit")
 break
