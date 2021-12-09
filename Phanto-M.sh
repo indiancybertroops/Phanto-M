@@ -39,7 +39,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 echo -e " ${C} " 
 PS3='Please enter your choice: '
-options=("Api 1" "Api 2 (Recommended)" "Api 3" "Combined Result From All Api Togetherly" "Api 4" "Wayback Url Scrap" "Api 5" "Exit"
+options=("Api 1" "Api 2 (Recommended)" "Api 3" "Combined Result From All Api Togetherly" "Api 4" "Wayback Url Scrap" "Api 5" "Api 6(recommended)" "Exit"
 )
 select opt in "${options[@]}"
 do
@@ -69,7 +69,10 @@ lynx --dump https://jldc.me/anubis/subdomains/$site | jq -r '.[]' |  sort -u > r
 lynx --dump https://sonar.omnisint.io/subdomains/$site | jq -r '.[]' |  sort -u > result2.txt
 lynx --dump https://dns.bufferover.run/dns?q=$site | jq -r '.FDNS_A[]' |  sort -u > result.txt
 lynx --dump https://api.hackertarget.com/hostsearch/?q=$site |  sort -u > result4.txt
-cat result.txt result2.txt result3.txt result4.txt > final.txt
+lynx --dump http://web.archive.org/cdx/search/cdx?url=$site | grep -oE http.*://.*/ | sort -u > wayback.txt
+lynx --dump  https://www.threatcrowd.org/searchApi/v2/domain/report/?domain=$site | jq -r ".subdomains[]" | sort -u > result5.txt
+lynx --dump  https://securitytrails.com/list/apex_domain/$site | grep -Po "((http|https):\/\/)?(([\w.-]*)\.([\w]*)\.([A-z]))\w+" | grep ".$site" | grep -v  "https://www.facebook.com" | grep -v "https://www.linkedin.com" | grep -v "https://status.securitytrails.io" | grep -v "https://docs.securitytrails.com" | sort -u > result6.txt
+cat result.txt result2.txt result3.txt result4.txt wayback.txt result5.txt result6.txt > final.txt
 echo " ${R} Results saved into ${B}final.txt ${R}checkout file created on same Directory where You've Installed Tool"
 ;;
 "Api 4")
@@ -89,6 +92,12 @@ echo -e " ${Y}Enter Url For Result From Api 5"
 read site
 lynx --dump  https://www.threatcrowd.org/searchApi/v2/domain/report/?domain=$site | jq -r ".subdomains[]" | sort -u > result5.txt
 echo -e " ${R} Results saved into ${B}result5.txt ${R}checkout file created on same Directory where You've Installed Tool"
+;;
+"Api 6(recommended)")
+echo -e " ${Y}Enter Url For Result From Api 6"
+read site
+lynx --dump  https://securitytrails.com/list/apex_domain/$site | grep -Po "((http|https):\/\/)?(([\w.-]*)\.([\w]*)\.([A-z]))\w+" | grep ".$site" | grep -v  "https://www.facebook.com" | grep -v "https://www.linkedin.com" | grep -v "https://status.securitytrails.io" | grep -v "https://docs.securitytrails.com" | sort -u > result6.txt
+echo -e " ${R} Results saved into ${B}result6.txt ${R}checkout file created on same Directory where You've Installed Tool"
 ;;
 "Exit")
 break
