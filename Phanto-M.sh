@@ -81,8 +81,8 @@ echo -e " ${R} Results saved into ${B}result4.txt ${R}checkout file created on s
 "Wayback Url Scrap")
 echo -e " ${Y}Enter Url For Result From Wayback Machine"
 read site
-lynx --dump http://web.archive.org/cdx/search/cdx?url=$site | grep -oE http.*://.*/ | sort -u > $1.txt
-echo -e " ${R} Results saved into ${B}$1.txt ${R}checkout file created on same Directory where You've Installed Tool"
+lynx --dump http://web.archive.org/cdx/search/cdx?url=$site | grep -oE http.*://.*/ | sort -u > wayback.txt
+echo -e " ${R} Results saved into ${B}wayback.txt ${R}checkout file created on same Directory where You've Installed Tool"
 ;;
 "Api 5")
 echo -e " ${Y}Enter Url For Result From Api 5"
