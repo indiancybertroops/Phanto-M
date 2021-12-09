@@ -78,8 +78,8 @@ read site
 lynx --dump https://api.hackertarget.com/hostsearch/?q=$site |  sort -u > result4.txt
 echo -e " ${R} Results saved into ${B}result4.txt ${R}checkout file created on same Directory where You've Installed Tool"
 ;;
-"Api 4")
-echo -e " ${Y} Wayback Url Scrap"
+"Wayback Url Scrap")
+echo -e " ${Y}Enter Url For Result From Wayback Machine"
 read site
 lynx --dump http://web.archive.org/cdx/search/cdx?url=$1 | grep -oE http.*://.*/ | sort -u > $1.txt
 echo -e " ${R} Results saved into ${B}$1.txt ${R}checkout file created on same Directory where You've Installed Tool"
