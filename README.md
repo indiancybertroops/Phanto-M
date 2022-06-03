@@ -22,6 +22,8 @@ root permission is required to install essential packages
    
    ![Profile Views](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/indiancybertroopsy/&title=Profile%20Views)
 
+## Instruction
+Dont Include Http or Https In Url
 
 ### Team Indian Cyber Troops:
 >Created By : Krishanu Sharma 
