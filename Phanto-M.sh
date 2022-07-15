@@ -10,7 +10,9 @@ Y='\033[0;38m'       # Yellow
 C='\033[0;36m'       # Cyan
 W='\033[0;37m'       # White
 apt install jq -y >/dev/null
+apt install sort -y >/dev/null
 apt install lynx -y >/dev/null
+apt install grep -y >/dev/null
 clear
 function banner() {
 	
@@ -63,7 +65,7 @@ lynx --dump https://jldc.me/anubis/subdomains/$site | jq -r '.[]' |  sort -u > r
 echo -e " ${R} Results saved into ${B}result3.txt ${R}checkout file created on same Directory where You've Installed Tool"
 ;;
 "Combined Result From All Api Togetherly")
-echo -e " ${Y} Enter The Website For Api combined api"
+echo -e " ${Y} Enter The Website For Api combined api" 
 read site
 lynx --dump https://jldc.me/anubis/subdomains/$site | jq -r '.[]' |  sort -u > result3.txt
 lynx --dump https://sonar.omnisint.io/subdomains/$site | jq -r '.[]' |  sort -u > result2.txt
