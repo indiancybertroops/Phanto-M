@@ -46,7 +46,7 @@ read -r url
 printf "${GREEN}\n[+] Enumerating subdomains from Api1"
 curl -s "https://sonar.omnisint.io/subdomains/$url" | jq -r '.[]' > sub
 printf "${GREEN}\n[+] Enumerating subdomains from Api2"
-#lynx --dump  https://www.threatcrowd.org/searchApi/v2/domain/report/?domain=$url | jq -r ".subdomains[]" | sort -u > sub1
+lynx --dump  https://www.threatcrowd.org/searchApi/v2/domain/report/?domain=$url | jq -r ".subdomains[]" | sort -u > sub1
 printf "${GREEN}\n[+] Enumerating subdomains from Api3"
 lynx --dump  https://securitytrails.com/list/apex_domain/$url | grep -Po "((http|https):\/\/)?(([\w.-]*)\.([\w]*)\.([A-z]))\w+" | grep ".$site" | grep -v  "https://www.facebook.com" | grep -v "https://www.linkedin.com" | grep -v "https://status.securitytrails.io" | grep -v "https://docs.securitytrails.com" | sort -u > sub3
 printf "${GREEN}\n[+] Enumerating subdomains from Api4\n"
